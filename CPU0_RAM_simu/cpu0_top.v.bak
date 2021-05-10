@@ -1,0 +1,144 @@
+
+module cpu0_top(
+input clk, input rst, 
+inout [31:0] gpio_pin, 
+input uart_rx, output uart_tx, 
+input buttom, output buttom_o
+/*output [31:0] pc, mar, mdr, dbus, SP_o, LR_o,
+output cpu_init, m_rw, m_en,
+output [3:0] itype*/
+);
+
+assign buttom_o = buttom;
+
+//cpu0
+wire [3:0] itype;
+wire cpu_init, m_rw, m_en;
+wire [31:0] mar, mdr, dbus;
+
+//RAM
+wire r_clk, r_rw;
+wire [31:0] r_addr, r_mdr, r_data;
+
+//GPIO
+wire IRQ_gpio, g_clk, g_rst, g_rw, g_en;
+wire [7:0] g_addr;
+wire [31:0] g_mdr, g_data;
+
+//UART
+wire IRQ_uart, u_clk, u_rst, u_rw, u_en;
+wire [7:0] u_addr;
+wire [31:0] u_mdr, u_data;
+
+//TIM1
+wire IRQ_tim1, t1_clk, t1_rst, t1_rw, t1_en;
+wire [7:0] t1_addr;
+wire [31:0] t1_mdr, t1_data;
+
+cpu0 cpu(
+.clock(clk),
+.reset(rst),
+.itype(itype),
+.pc(pc),
+.tick(),
+.ir(),
+.mar(mar),
+.mdr(mdr),
+.dbus(dbus),
+.m_en(m_en),
+.m_rw(m_rw),
+.m_w1(),
+.SP_o(SP_o),
+.LR_o(LR_o)
+);
+
+bus_control bus1(
+.clk(clk),
+.rst(rst),
+.m_en(m_en),
+.m_rw(m_rw),
+.mar(mar),
+.mdr(mdr),
+.dbus(dbus),
+.IRQ_type(itype),
+//RAM
+.r_clk(r_clk),
+.r_rw(r_rw),
+.r_addr(r_addr),
+.r_mdr(r_mdr),
+.r_data(r_data),
+//GPIO
+.g_clk(g_clk),
+.g_rst(g_rst),
+.g_rw(g_rw),
+.g_en(g_en),
+.g_addr(g_addr),
+.g_mdr(g_mdr),
+.g_data(g_data),
+.IRQ_gpio(IRQ_gpio),
+//UART
+.u_clk(u_clk),
+.u_rst(u_rst),
+.u_en(u_en),
+.u_rw(u_rw),
+.u_addr(u_addr),
+.u_mdr(u_mdr),
+.u_data(u_data),
+.IRQ_uart(IRQ_uart),
+//TIM1
+.t1_clk(t1_clk),
+.t1_rst(t1_rst),
+.t1_en(t1_en),
+.t1_rw(t1_rw),
+.t1_addr(t1_addr),
+.t1_mdr(t1_mdr),
+.t1_data(t1_data),
+.IRQ_tim1(IRQ_tim1)
+);
+
+ram ram0(
+.address(r_addr),
+.clock(r_clk),
+.data(r_mdr),
+.wren(r_rw),
+.q(r_data)
+);
+
+gpio gpio1(
+.clk(g_clk),
+.rst(g_rst),
+.r_w(g_rw),
+.en(g_en),
+.addr(g_addr),
+.dbus(g_mdr),
+.dgpio(g_data),
+.gpio_pin(gpio_pin),
+.IRQ_gpio(IRQ_gpio)
+);
+
+uart uart1(
+.clk(u_clk),
+.rst(u_rst),
+.r_w(u_rw),
+.en(u_en),
+.rx_pin(uart_rx),
+.addr(u_addr),
+.dbus(u_mdr),
+.dout(u_data),
+.uart_i(IRQ_uart),
+.tx_pin(uart_tx),
+.rx_empty(rx_empty)
+);
+
+timer tim1(
+.clk(t1_clk), 
+.rst(t1_rst), 
+.en(t1_en), 
+.r_w(t1_rw),
+.addr(t1_addr),
+.dbus(t1_mdr),
+.dout(t1_data),
+.IRQ_tim(IRQ_tim1), 
+.count()
+);
+endmodule

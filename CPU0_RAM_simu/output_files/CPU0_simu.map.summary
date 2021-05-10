@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Mon May 10 09:59:18 2021
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Revision Name : CPU0_simu
+Top-level Entity Name : cpu0_top
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 742
+Total pins : 168
+Total virtual pins : 0
+Total block memory bits : 32,768
+Total DSP Blocks : 2
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0
