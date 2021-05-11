@@ -1,0 +1,4 @@
+﻿  asm2bin.cpp
+d:\chu\chuboy20200402\cpu0\cpu0_assembler\cpu0as_link_risa_20200510\source\project1\project1\asm2bin.cpp(1070): warning C4244: 'return': 將 '__int64' 轉換為 'uint32_t'，由於類型不同，可能導致資料遺失
+d:\chu\chuboy20200402\cpu0\cpu0_assembler\cpu0as_link_risa_20200510\source\project1\project1\asm2bin.cpp(1078): warning C4018: '<': signed/unsigned 不相符
+  Project1.vcxproj -> D:\CHU\chuboy20200402\CPU0\cpu0_assembler\CPU0AS_link_risa_20200510\source\Project1\Debug\Project1.exe
