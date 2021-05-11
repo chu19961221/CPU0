@@ -1,4 +1,4 @@
-# A simple FPGA-CPU practice: CPU0
+# A simple FPGA-CPU practice project: CPU0
 ## IDE
 Quartus Prime Lite version 18.0 [Download](https://fpgasoftware.intel.com/18.0/?edition=lite&platform=windows)
 ## HackMD
